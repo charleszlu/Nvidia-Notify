@@ -34,20 +34,22 @@ The Value is a tuple of size 4 with the following values:
 load_dotenv()
 
 USE_TWILIO = True
-USE_DISCORD = True
+USE_DISCORD = False
 NOTIFY_MAC = False
 
 urlKeyWords = {
-    "https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3080/" : ("https://api-prod.nvidia.com/direct-sales-shop/DR/products/en_us/USD/5438481700", False, GET_API, 'Nvidia 3080', ),
-    "https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3090/" : ("https://api-prod.nvidia.com/direct-sales-shop/DR/products/en_us/USD/5438481600,5443202600", False, GET_API, 'Nvidia 3090', ),
-    "https://www.evga.com/products/productlist.aspx?type=0&family=GeForce+30+Series+Family&chipset=RTX+3080" : ("AddCart", True, GET_URLLIB, 'EVGA 3080'),
+    # "https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3080/" : ("https://api-prod.nvidia.com/direct-sales-shop/DR/products/en_us/USD/5438481700", False, GET_API, 'Nvidia 3080', ),
+    # "https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3090/" : ("https://api-prod.nvidia.com/direct-sales-shop/DR/products/en_us/USD/5438481600,5443202600", False, GET_API, 'Nvidia 3090', ),
+    # "https://www.evga.com/products/productlist.aspx?type=0&family=GeForce+30+Series+Family&chipset=RTX+3080" : ("AddCart", True, GET_URLLIB, 'EVGA 3080'),
     # "https://www.evga.com/products/productlist.aspx?type=0&family=GeForce+16+Series+Family&chipset=GTX+1650+Super" : ("AddCart", True, GET_URLLIB, 'EVGATest'),
-    "https://www.newegg.com/p/pl?d=rtx+3080&N=100007709%20601357247" : ("Add to cart", True, GET_URLLIB, 'Newegg 3080'),
-    "https://www.bhphotovideo.com/c/search?q=3080&filters=fct_category%3Agraphic_cards_6567" : ("Add to Cart", True, GET_URLLIB, 'BandH 3080'),
-    "https://www.bestbuy.com/site/searchpage.jsp?st=3080" : ("cart.svg", True, GET_SELENIUM, "BestBuy"),
+    # "https://www.newegg.com/p/pl?d=rtx+3080&N=100007709%20601357247" : ("Add to cart", True, GET_URLLIB, 'Newegg 3080'),
+    # "https://www.bhphotovideo.com/c/search?q=3080&filters=fct_category%3Agraphic_cards_6567" : ("Add to Cart", True, GET_URLLIB, 'BandH 3080'),
+    # "https://www.bestbuy.com/site/searchpage.jsp?st=3080" : ("cart.svg", True, GET_SELENIUM, "BestBuy"),
     # "https://www.bestbuy.com/site/searchpage.jsp?st=tv" : ("cart.svg", True, GET_SELENIUM, "BestBuyTest")
-    "https://www.amazon.com/stores/page/6B204EA4-AAAC-4776-82B1-D7C3BD9DDC82?ingress=0" : (">Add to Cart<", True, GET_URLLIB, 'Amazon 3080')
+    # "https://www.amazon.com/stores/page/6B204EA4-AAAC-4776-82B1-D7C3BD9DDC82?ingress=0" : (">Add to Cart<", True, GET_URLLIB, 'Amazon 3080')
     # "https://store.asus.com/us/item/202009AM160000001" : (">Buy Now<", True, GET_URLLIB, 'ASUS')
+    "https://www.newegg.com/global/au-en/asus-geforce-rtx-3080-tuf-rtx3080-10g-gaming/p/N82E16814126453" : ("Add to cart", True, GET_URLLIB, '[Newegg] ASUS TUF 3080'),
+    "https://www.newegg.com/global/au-en/asus-geforce-rtx-3080-tuf-rtx3080-o10g-gaming/p/N82E16814126452" : ("Add to cart", True, GET_URLLIB, '[Newegg] ASUS TUF 3080 OC'),
 }
 
 # Download the geckodriver from https://github.com/mozilla/geckodriver/releases, and then put the path to the executable in this rstring.
@@ -79,6 +81,9 @@ options = Options()
 options.headless = True
 driver = webdriver.Firefox(options=options, executable_path=firefoxWebdriverExecutablePath)
 numReloads = 0
+
+def test_alert():
+    message = client.messages.create(to=twilioToNumber, from_=twilioFromNumber, body='nVidia Notifier started running. Alerts will be sent from this number.')
 
 def alert(url):
     product = urlKeyWords[url][3]
@@ -180,7 +185,7 @@ def main():
                 alert(url)
 
         baseSleepAmt = 1
-        totalSleep = baseSleepAmt + random.uniform(1, 11)
+        totalSleep = baseSleepAmt + random.uniform(1, 21)
         # print("Sleeping for {} seconds".format(totalSleep))
         sleep(totalSleep)
 

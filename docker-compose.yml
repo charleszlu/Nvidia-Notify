@@ -1,0 +1,7 @@
+version: "2"
+
+services:
+  notify:
+    image: nvidia-notify:latest
+    environment:
+      TZ: Australia/Sydney
