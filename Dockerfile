@@ -48,7 +48,7 @@ COPY . /notify
 
 RUN pip install -r /notify/requirements.txt
 
-WORKDIR /notify
+RUN chmod 0755 /notify/entrypoint.sh
 
-ENTRYPOINT ["python notifier.py"]
+ENTRYPOINT ["/notify/entrypoint.sh"]
 
