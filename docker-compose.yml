@@ -4,4 +4,9 @@ services:
   notify:
     image: nvidia-notify:latest
     environment:
-      TZ: Australia/Sydney
+      TZ: <timezone>
+      TWILIOTONUM:
+      TWILIOFROMNUM:
+      TWILIOSID:
+      TWILIOAUTH:
+      

@@ -31,11 +31,11 @@ The Value is a tuple of size 4 with the following values:
     2. Set this to GET_SELENIUM, GET_URLLIB, or GET_API to choose which method is used to fetch data from the site. USE_SELENIUM is useful for jsx pages.
     3. A nickname for the alert to use. This is displayed in alerts.
 '''
-load_dotenv()
 
 USE_TWILIO = True
 USE_DISCORD = False
 NOTIFY_MAC = False
+NOTIFY_WIN = False
 
 urlKeyWords = {
     # "https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3080/" : ("https://api-prod.nvidia.com/direct-sales-shop/DR/products/en_us/USD/5438481700", False, GET_API, 'Nvidia 3080', ),
@@ -52,10 +52,6 @@ urlKeyWords = {
     "https://www.newegg.com/global/au-en/asus-geforce-rtx-3080-tuf-rtx3080-o10g-gaming/p/N82E16814126452" : ("Add to cart", True, GET_URLLIB, '[Newegg] ASUS TUF 3080 OC'),
 }
 
-# Download the geckodriver from https://github.com/mozilla/geckodriver/releases, and then put the path to the executable in this rstring.
-# I used version 0.27.0
-firefoxWebdriverExecutablePath = path.normpath(getenv('WEBDRIVERPATH'))
-
 # If you want to send alerts to discord via webhooks, place the webhook URL here
 if USE_DISCORD:
     discordWebhookUrl = "INSERT DISCORD WEBHOOK URL HERE"
@@ -71,7 +67,7 @@ if USE_TWILIO:
 
 if NOTIFY_MAC:
     import os
-else:
+elif NOTIFY_WIN:
     from win10toast import ToastNotifier
     toast = ToastNotifier()
 
@@ -79,10 +75,11 @@ else:
 
 options = Options()
 options.headless = True
-driver = webdriver.Firefox(options=options, executable_path=firefoxWebdriverExecutablePath)
+driver = webdriver.Firefox(options=options)
 numReloads = 0
 
 def test_alert():
+    print("Sending test notifier...")
     message = client.messages.create(to=twilioToNumber, from_=twilioFromNumber, body='nVidia Notifier started running. Alerts will be sent from this number.')
 
 def alert(url):
@@ -92,7 +89,7 @@ def alert(url):
     webbrowser.open(url, new=1)
     if NOTIFY_MAC:
         mac_alert("{} IN STOCK".format(product), url)
-    else:
+    elif NOTIFY_WIN:
         toast.show_toast("{} IN STOCK".format(product), url, duration=5, icon_path="icon.ico")
     if USE_TWILIO:
         message = client.messages.create(to=twilioToNumber, from_=twilioFromNumber, body=url)
@@ -133,7 +130,7 @@ def selenium_get(url):
         numReloads = 0
         driver.close()
         driver.quit()
-        driver = webdriver.Firefox(options=options, executable_path=firefoxWebdriverExecutablePath)
+        driver = webdriver.Firefox(options=options)
     return http
 
 def urllib_get(url):
@@ -154,12 +151,16 @@ def nvidia_get(url, api_url):
         alert(url)
 
 def main():
+    # Send test alert first
+    test_alert()
+
     numSearches = 0
+    
     while True:
         now = datetime.now()
         current_time = now.strftime("%H:%M:%S")
-        print("Starting search {} at {}".format(numSearches, current_time))
         numSearches += 1
+        print("Starting search {} at {}".format(numSearches, current_time))
         for url, info in urlKeyWords.items():
             print("\tChecking {}...".format(info[3]))
 
@@ -185,7 +186,7 @@ def main():
                 alert(url)
 
         baseSleepAmt = 1
-        totalSleep = baseSleepAmt + random.uniform(1, 21)
+        totalSleep = baseSleepAmt + random.uniform(10, 20)
         # print("Sleeping for {} seconds".format(totalSleep))
         sleep(totalSleep)
 
