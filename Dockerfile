@@ -48,5 +48,7 @@ COPY . /notify
 
 RUN pip install -r /notify/requirements.txt
 
-ENTRYPOINT ["python /notify/notifier.py"]
+WORKDIR /notify
+
+ENTRYPOINT ["python notifier.py"]
 
