@@ -5,6 +5,8 @@ services:
     image: nvidia-notify:latest
     environment:
       TZ: <timezone>
+      REFRESH_TIME_MIN: 60
+      REFRESH_TIME_MAX: 240
       TWILIOTONUM:
       TWILIOFROMNUM:
       TWILIOSID:
