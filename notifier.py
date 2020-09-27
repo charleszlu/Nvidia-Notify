@@ -186,7 +186,7 @@ def main():
                 alert(url)
 
         baseSleepAmt = 1
-        totalSleep = baseSleepAmt + random.uniform(10, 20)
+        totalSleep = baseSleepAmt + random.uniform(getenv('REFRESH_TIME_MIN'), getenv('REFRESH_TIME_MAX'))
         # print("Sleeping for {} seconds".format(totalSleep))
         sleep(totalSleep)
 
