@@ -4,7 +4,7 @@ from selenium.webdriver.firefox.options import Options
 
 import json
 import requests
-import webbrowser
+# import webbrowser
 from time import sleep
 import random
 from datetime import datetime, time
@@ -86,7 +86,7 @@ def alert(url):
     product = urlKeyWords[url][3]
     print("{} IN STOCK".format(product))
     print(url)
-    webbrowser.open(url, new=1)
+    # webbrowser.open(url, new=1)
     if NOTIFY_MAC:
         mac_alert("{} IN STOCK".format(product), url)
     elif NOTIFY_WIN:
@@ -143,7 +143,7 @@ def urllib_get(url):
     return html
 
 def nvidia_get(url, api_url):
-    response = requests.get(api_url)
+    response = requests.get(api_url, timeout=5)
     item = response.json()
 
     # print(item['products']['product'][0]['inventoryStatus']['status'])
