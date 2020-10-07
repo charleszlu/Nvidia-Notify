@@ -106,7 +106,7 @@ def alert(url):
             print(err)
         else:
             print("Payload delivered successfully, code {}.".format(result.status_code))
-    time.sleep(60)
+    sleep(60)
 
 def mac_alert(title, text):
     os.system("""
