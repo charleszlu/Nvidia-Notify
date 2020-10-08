@@ -52,8 +52,8 @@ urlKeyWords = {
     # "https://www.bestbuy.com/site/searchpage.jsp?st=tv" : ("cart.svg", True, GET_SELENIUM, "BestBuyTest")
     # "https://www.amazon.com/stores/page/6B204EA4-AAAC-4776-82B1-D7C3BD9DDC82?ingress=0" : (">Add to Cart<", True, GET_URLLIB, 'Amazon 3080')
     # "https://store.asus.com/us/item/202009AM160000001" : (">Buy Now<", True, GET_URLLIB, 'ASUS')
-    "https://www.newegg.com/global/au-en/asus-geforce-rtx-3080-tuf-rtx3080-10g-gaming/p/N82E16814126453" : ("Add to cart", True, GET_URLLIB, '[Newegg] ASUS TUF 3080'),
-    "https://www.newegg.com/global/au-en/asus-geforce-rtx-3080-tuf-rtx3080-o10g-gaming/p/N82E16814126452" : ("Add to cart", True, GET_URLLIB, '[Newegg] ASUS TUF 3080 OC'),
+    "https://www.newegg.com/global/au-en/asus-geforce-rtx-3080-tuf-rtx3080-10g-gaming/p/N82E16814126453" : ("\"Add to cart \"", True, GET_URLLIB, '[Newegg] ASUS TUF 3080'),
+    "https://www.newegg.com/global/au-en/asus-geforce-rtx-3080-tuf-rtx3080-o10g-gaming/p/N82E16814126452" : ("\"Add to cart \"", True, GET_URLLIB, '[Newegg] ASUS TUF 3080 OC'),
 }
 
 # If you want to send alerts to discord via webhooks, place the webhook URL here
@@ -121,7 +121,6 @@ def alert(url):
             print(err)
         else:
             print("Payload delivered successfully, code {}.".format(result.status_code))
-    sleep(60)
 
 def mac_alert(title, text):
     os.system("""
