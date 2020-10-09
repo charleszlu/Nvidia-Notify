@@ -42,13 +42,13 @@ NOTIFY_MAC = False
 NOTIFY_WIN = False
 
 urlKeyWords = {
-    "https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3080/" : ("https://api-prod.nvidia.com/direct-sales-shop/DR/products/en_us/USD/5438481700", False, GET_API, 'Nvidia 3080'),
+    "https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3080/" : ("https://api-prod.nvidia.com/direct-sales-shop/DR/products/en_us/USD/5438481700", False, GET_API, 'Nvidia 3080 FE'),
     # "https://www.nvidia.com/en-us/geforce/graphics-cards/30-series/rtx-3090/" : ("https://api-prod.nvidia.com/direct-sales-shop/DR/products/en_us/USD/5438481600,5443202600", False, GET_API, 'Nvidia 3090'),
     # "https://www.evga.com/products/productlist.aspx?type=0&family=GeForce+30+Series+Family&chipset=RTX+3080" : ("AddCart", True, GET_URLLIB, 'EVGA 3080'),
     # "https://www.evga.com/products/productlist.aspx?type=0&family=GeForce+16+Series+Family&chipset=GTX+1650+Super" : ("AddCart", True, GET_URLLIB, 'EVGATest'),
     # "https://www.newegg.com/p/pl?d=rtx+3080&N=100007709%20601357247" : ("Add to cart", True, GET_URLLIB, 'Newegg 3080'),
     # "https://www.bhphotovideo.com/c/search?q=3080&filters=fct_category%3Agraphic_cards_6567" : ("Add to Cart", True, GET_URLLIB, 'BandH 3080'),
-    # "https://www.bestbuy.com/site/searchpage.jsp?st=3080&intl=nosplash" : ("cart.svg", True, GET_SELENIUM, "BestBuy"),
+    "https://www.bestbuy.com/site/nvidia-geforce-rtx-3080-10gb-gddr6x-pci-express-4-0-graphics-card-titanium-and-black/6429440.p?skuId=6429440" : ("cart.svg", True, GET_SELENIUM, "[BestBuy] 3080 FE"),
     # "https://www.bestbuy.com/site/searchpage.jsp?st=tv" : ("cart.svg", True, GET_SELENIUM, "BestBuyTest")
     # "https://www.amazon.com/stores/page/6B204EA4-AAAC-4776-82B1-D7C3BD9DDC82?ingress=0" : (">Add to Cart<", True, GET_URLLIB, 'Amazon 3080')
     # "https://store.asus.com/us/item/202009AM160000001" : (">Buy Now<", True, GET_URLLIB, 'ASUS')
